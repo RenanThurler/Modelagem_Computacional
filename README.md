@@ -6,7 +6,7 @@ Autores: Felipe Anderson e Renan Thurler
 
 ## Como rodar
 
-Instala a única dependência (matplotlib):
+Instale a única dependência (matplotlib):
 
 ```
 pip install matplotlib
