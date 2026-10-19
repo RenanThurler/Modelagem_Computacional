@@ -15,7 +15,7 @@ pip install matplotlib
 Roda o script principal:
 
 ```
-python otimizacao_tanque.py
+python codigo_principal.py
 ```
 
 Isso vai printar no terminal as dimensões ótimas do tanque (raio, altura) e o custo mínimo encontrado, além de salvar o gráfico de convergência (`convergencia.png`).
