@@ -1,34 +1,46 @@
+"""
+Trabalho Computacional - Modelagem Computacional
+Otimizacao do custo de um tanque cilindrico usando Metodo do Gradiente
+com derivadas numericas e funcao de penalizacao.
+
+Alunos: Felipe Anderson e Renan Thurler
+"""
+
 import math
 import matplotlib.pyplot as plt
 
+# Constantes do problema
 CUSTO_BASE = 150.0     # R$ por m^2
 CUSTO_LATERAL = 100.0  # R$ por m^2
 CUSTO_TETO = 200.0     # R$ por m^2
 VOLUME_MINIMO = 500.0  # R$ por m^3
 
+# Funcao objetivo f(r,h): custo total do tanque
 def custo(r, h):
     area_base = math.pi * r**2
     area_lateral = 2 * math.pi * r * h
     area_teto = math.pi * r**2
     return CUSTO_BASE * area_base + CUSTO_LATERAL * area_lateral + CUSTO_TETO * area_teto
 
-
+# Restricao g(r,h) = Vmin - V <= 0
 def restricao(r, h):
     volume = math.pi * r**2 * h
     return VOLUME_MINIMO - volume
 
+# Funcao auxiliar P(r,h) usada no lugar do custo puro, se a restricao esta satisfeita (volume >= Vmin), a penalidade e zero; Se a restricao e violada, soma uma multa proporcional a mu.
 def penalizacao(r, h, mu):
     g = restricao(r, h)
     return custo(r, h) + mu * (max(0.0, g)) ** 2
 
+#Calcula as derivadas parciais de P em relacao a r e h usando diferencas finitas simples adiantadas.
 def derivadas_numericas(r, h, mu, delta=1e-5):
     P_atual = penalizacao(r, h, mu)
     dP_dr = (penalizacao(r + delta, h, mu) - P_atual) / delta
     dP_dh = (penalizacao(r, h + delta, mu) - P_atual) / delta
     return dP_dr, dP_dh
 
+#Metodo do Gradiente com derivadas numericas eetorna as dimensoes otimas (r, h), o custo real no ponto final e o historico do valor de P a cada iteracao.
 def metodo_do_gradiente(r0, h0, mu, alpha, delta=1e-5, max_iteracoes=20000, tolerancia=1e-8):
-
     r, h = r0, h0
     historico_P = [penalizacao(r, h, mu)]
     for _ in range(max_iteracoes):
@@ -62,6 +74,7 @@ if __name__ == "__main__":
     print(f"Volume final:     {volume_final:.4f} m^3 (minimo exigido: {VOLUME_MINIMO} m^3)")
     print(f"Custo minimo:     R$ {custo_otimo:.2f}")
 
+# Grafico
     plt.figure(figsize=(8, 5))
     plt.plot(historico[1:])
     plt.xlabel("Iteracao")

@@ -1,3 +1,5 @@
+#Teste com diferentes valores de mu (penalidade) e alpha (passo) para ver como cada elemento afeta o resultado da otimizacao do tanque.
+
 import math
 from codigo_principal import metodo_do_gradiente, VOLUME_MINIMO
 
