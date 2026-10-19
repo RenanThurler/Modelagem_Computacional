@@ -23,7 +23,7 @@ Isso vai printar no terminal as dimensões ótimas do tanque (raio, altura) e o 
 Pra ver os testes com diferentes valores dos parâmetros `mu` (penalidade) e `alpha` (tamanho do passo):
 
 ```
-python teste_parametros.py
+python testes_de_parametros.py
 ```
 
 ## Arquivos
