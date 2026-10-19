@@ -61,3 +61,13 @@ if __name__ == "__main__":
     print(f"Altura otima (h): {h_otimo:.4f} m")
     print(f"Volume final:     {volume_final:.4f} m^3 (minimo exigido: {VOLUME_MINIMO} m^3)")
     print(f"Custo minimo:     R$ {custo_otimo:.2f}")
+
+plt.figure(figsize=(8, 5))
+plt.plot(historico[1:])
+plt.xlabel("Iteracao")
+plt.ylabel("Valor da funcao P(r,h)")
+plt.title("Convergencia do Metodo do Gradiente")
+plt.grid(True)
+plt.tight_layout()
+plt.savefig("convergencia.png", dpi=150)
+print("\nGrafico de convergencia salvo em convergencia.png")
