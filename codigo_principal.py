@@ -32,14 +32,14 @@ def penalizacao(r, h, mu):
     g = restricao(r, h)
     return custo(r, h) + mu * (max(0.0, g)) ** 2
 
-#Calcula as derivadas parciais de P em relacao a r e h usando diferencas finitas simples adiantadas.
+# Calcula as derivadas parciais de P em relacao a r e h usando diferencas finitas simples adiantadas.
 def derivadas_numericas(r, h, mu, delta=1e-5):
     P_atual = penalizacao(r, h, mu)
     dP_dr = (penalizacao(r + delta, h, mu) - P_atual) / delta
     dP_dh = (penalizacao(r, h + delta, mu) - P_atual) / delta
     return dP_dr, dP_dh
 
-#Metodo do Gradiente com derivadas numericas eetorna as dimensoes otimas (r, h), o custo real no ponto final e o historico do valor de P a cada iteracao.
+# Metodo do Gradiente com derivadas numericas eetorna as dimensoes otimas (r, h), o custo real no ponto final e o historico do valor de P a cada iteracao.
 def metodo_do_gradiente(r0, h0, mu, alpha, delta=1e-5, max_iteracoes=20000, tolerancia=1e-8):
     r, h = r0, h0
     historico_P = [penalizacao(r, h, mu)]
